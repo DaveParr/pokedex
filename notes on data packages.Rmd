@@ -1,0 +1,30 @@
+---
+title: "notes for data packages"
+output: html_document
+---
+
+## create package
+
+* R + RStudio
+* New Project > New Package
+
+## `devtools::use_data_raw` depreceated
+
+https://github.com/r-lib/devtools/blob/75e1dbe6faf0b9abfe9cbfa57d036e537a983daf/R/infrastructure.R#L87-L95
+
+### Usethis::use_data_raw()
+
+```r
+usethis::use_data_raw()
+✔ Creating 'data-raw/'
+✔ Adding '^data-raw$' to '.Rbuildignore'
+Next:
+● Add data creation scripts in 'data-raw/'
+● Use `usethis::use_data()` to add data to package
+```
+
+## usage stats are available!
+
+https://www.smogon.com/stats/
+
+https://www.smogon.com/forums/threads/gen-8-smogon-university-usage-statistics-discussion-thread.3657197/
