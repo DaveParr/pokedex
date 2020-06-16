@@ -190,3 +190,14 @@
 #'}
 #' @source \url{https://github.com/veekun/pokedex}
 "type_damage"
+
+#' @title DATASET_TITLE
+#' @description DATASET_DESCRIPTION
+#' @format A data frame with 57 rows and 3 variables:
+#' \describe{
+#'   \item{\code{colour}}{character COLUMN_DESCRIPTION}
+#'   \item{\code{type}}{character COLUMN_DESCRIPTION}
+#'   \item{\code{colour_var}}{character COLUMN_DESCRIPTION}
+#'}
+#' @details DETAILS
+"type_colours"
