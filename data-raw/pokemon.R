@@ -57,14 +57,13 @@ pokedex$pokemon %>%
     ) %>%
   left_join(
     simple_species,
-    by = c("species_id" = "id", "identifier"),
+    by = c("species_id" = "id"),
     suffix = c("_mon", "_species")
   ) %>%
   left_join(pokedex$pokemon_colors,
             by = c("color_id" = "id"),
             suffix = c("", "_color")) %>%
   select(-color_id) %>%
-  rename("color" = "identifier_color") %>%
   left_join(pokedex$pokemon_shapes,
             by = c("shape_id" = "id"),
             suffix = c("", "_shape")) %>%
