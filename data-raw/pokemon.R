@@ -60,10 +60,6 @@ pokedex$pokemon %>%
     by = c("species_id" = "id"),
     suffix = c("_mon", "_species")
   ) %>%
-  rename("identifier" = "identifier_species", "default_form" = "identifier_mon") %>% # use species as it has simple name
-  mutate(
-    default_form = str_remove(default_form, ".*-") # remove the pokemon at the start
-  ) %>% #
   left_join(pokedex$pokemon_colors %>%
               rename("color" = "identifier"),
             by = c("color_id" = "id"),
@@ -74,12 +70,29 @@ pokedex$pokemon %>%
             by = c("shape_id" = "id"),
             suffix = c("", "_shape")) %>%
   select(-shape_id) %>%
-  left_join(pokedex$pokemon_habitats %>%
-              rename("habitat" = "identifier"),
-            by = c("habitat_id" = "id"),
-            suffix = c("", "_habitat")) %>%
-  select(-habitat_id)  %>%
-  # convert integer value to metric decimal m and kg
-  mutate_at(c("height", "weight"), ~ .x / 10) -> pokemon
+  mutate_at(c("height", "weight"), ~ .x / 10) %>% # convert integer value to metric decimal m and kg
+  select(id,
+         name,
+         identifier_species,
+         identifier_mon,
+         genus,
+         color,
+         shape,
+         type_1,
+         type_2,
+         height,
+         weight,
+         base_experience,
+         hp,
+         attack,
+         defense,
+         special_attack,
+         special_defense,
+         speed,
+         flavour_text,
+         generation_id,
+         evolves_from_species_id,
+         evolution_chain_id
+         ) -> pokemon
 
 usethis::use_data(pokemon, overwrite = TRUE)
