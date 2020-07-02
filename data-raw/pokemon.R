@@ -60,20 +60,25 @@ pokedex$pokemon %>%
     by = c("species_id" = "id"),
     suffix = c("_mon", "_species")
   ) %>%
-  left_join(pokedex$pokemon_colors,
+  rename("identifier" = "identifier_species", "default_form" = "identifier_mon") %>% # use species as it has simple name
+  mutate(
+    default_form = str_remove(default_form, ".*-") # remove the pokemon at the start
+  ) %>% #
+  left_join(pokedex$pokemon_colors %>%
+              rename("color" = "identifier"),
             by = c("color_id" = "id"),
             suffix = c("", "_color")) %>%
   select(-color_id) %>%
-  left_join(pokedex$pokemon_shapes,
+  left_join(pokedex$pokemon_shapes %>%
+              rename("shape" = "identifier"),
             by = c("shape_id" = "id"),
             suffix = c("", "_shape")) %>%
   select(-shape_id) %>%
-  rename("shape" = "identifier_shape") %>%
-  left_join(pokedex$pokemon_habitats,
+  left_join(pokedex$pokemon_habitats %>%
+              rename("habitat" = "identifier"),
             by = c("habitat_id" = "id"),
             suffix = c("", "_habitat")) %>%
-  select(-habitat_id) %>%
-  rename("habitat" = "identifier_habitat") %>%
+  select(-habitat_id)  %>%
   # convert integer value to metric decimal m and kg
   mutate_at(c("height", "weight"), ~ .x / 10) -> pokemon
 
